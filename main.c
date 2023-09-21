@@ -3,6 +3,8 @@
 #include <string.h>
 #include "pokemon.h"
 
+#include <stdlib.h>
+#include "map.h"
 
 int main() {
     printf("Po-C-mon!\n");
@@ -20,5 +22,20 @@ int main() {
     current_pokemon->hp-=losthp(current_pokemon,newPokemon("Salameche",78,78,52,21,65,"Feu"));
     printf("%s %f",equipe[1]->name,equipe[1]->hp);
 
+
+    //Génération du joueur et de la map
+    Player *player = newPlayer(0, 0);
+    char ** map = generateMap(player);
+    setSpawnPoint(map, player);
+    updateMovement(map, player, ' ');
+
+    //Boucle de jeu
+    while(1){
+        char command;
+        fflush(stdin);
+        scanf("%c", &command);
+        fflush(stdin);
+        printf("FIGHT AGAINST POKEMON N° : %d", updateMovement(map, player, command));
+    };
     return 0;
 }
