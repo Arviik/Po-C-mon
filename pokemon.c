@@ -97,11 +97,12 @@ double pocmonType (char* typeOne, char* typetwo){
     return typeMatrix[oneIndice][twoIndice];
 }
 
-Pokemon* newPokemon(char *name,int hp,int attack,int defense,int speed,char *type){
+Pokemon* newPokemon(char *name,double hp,int hp_max,int attack,int defense,int speed,char *type){
     Pokemon *newPokemon= malloc(sizeof (Pokemon));
     newPokemon->name= malloc(sizeof(char)*(strlen(name)+1));
     strcpy(newPokemon->name,name);
     newPokemon->hp=hp;
+    newPokemon->hp_max=hp_max;
     newPokemon->attack=attack;
     newPokemon->defense=defense;
     newPokemon->speed=speed;
@@ -111,9 +112,9 @@ Pokemon* newPokemon(char *name,int hp,int attack,int defense,int speed,char *typ
 }
 Pokemon* starter(){
     int choice;
-    Pokemon *Bulbizarre= newPokemon("Bulbizarre",90,49,24,45,"Plante");
-    Pokemon *Salameche= newPokemon("Salameche",78,52,21,65,"Feu");
-    Pokemon *Carapuce= newPokemon("Carapuce",88,48,32,43,"Eau");
+    Pokemon *Bulbizarre= newPokemon("Bulbizarre",90,90,49,24,45,"Plante");
+    Pokemon *Salameche= newPokemon("Salameche",78,78,52,21,65,"Feu");
+    Pokemon *Carapuce= newPokemon("Carapuce",88,88,48,32,43,"Eau");
     Pokemon *Starter;
     printf("Veuillez choisir un Starter 0:Bulbizarre 1:Salameche 2:Carapuce \n");
     fflush(stdin);
