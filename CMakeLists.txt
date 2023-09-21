@@ -5,4 +5,5 @@ set(CMAKE_C_STANDARD 17)
 
 add_executable(Po_C_mon main.c
         map.c
-        map.h)
+        map.h
+        pokemon.c)
