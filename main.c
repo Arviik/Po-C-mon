@@ -21,6 +21,8 @@ int main() {
         equipe[i]= calloc(1,sizeof(Pokemon));
 
     }
+    pokedex[0]=starter();
+
     equipe[0]=starter();
     Pokemon *current_pokemon=equipe[0];
 
@@ -34,6 +36,7 @@ int main() {
     short gameOver = 0;
     //Boucle de jeu
     while(!gameOver){
+        team_hp_reset(equipe);
         char command;
         fflush(stdin);
         scanf("%c", &command);
@@ -43,6 +46,7 @@ int main() {
             printf("FIGHT AGAINST POKEMON N° : %d", fightAgainst) ;
             short isFighting = 1;
             Pokemon *fightingPokemon = newPokemon("Salameche",78,78,52,21,65,"Feu");
+            printf("Vous rencontrez un %s sauvage",fightingPokemon->name);
             int action;
             do{
                 printf("Que voulez vous faire ?\n 1 - Attaquer 2 - Soigner 3 - Fuir 4 - Pokeball\n");
@@ -92,6 +96,7 @@ int main() {
                         roundResult=pokeball(current_pokemon,fightingPokemon,equipe);
                         if (roundResult == 1){
                             printf("\nVous avez capturer le pokemon !");
+                            show_team(equipe);
                             isFighting  = 0;
                         }else if(roundResult == -1){
                             printf("\nVous n'avez plus de pokemon dans votre equipe!\n           - GAME OVER - ");
