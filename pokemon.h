@@ -38,6 +38,6 @@ void free_pokemon(Pokemon *pokemon);
 PokemonArray *new_pokemon_array();
 void free_pokemon_array(PokemonArray *pokemonArray);
 void add_pokemon_to_array(PokemonArray *pokemonArray, const Pokemon *pokemon);
-Pokemon get_pokemon_from_array(const PokemonArray *pokemonArray, int index);
 PokemonArray *get_pokemon_array_from_csv();
+Pokemon get_pokemon(int index);
 #endif //PO_C_MON_POKEMON_H
