@@ -21,9 +21,9 @@ int main() {
         equipe[i]= calloc(1,sizeof(Pokemon));
 
     }
-    Pokemon **pokedex= calloc(11,sizeof(Pokemon));
+    Pokemon **pokedex= calloc(11,sizeof(Pokemon*));
     for (int i = 0; i < 11; ++i) {
-        equipe[i]= calloc(1,sizeof(Pokemon));
+        pokedex[i]= calloc(1,sizeof(Pokemon));
 
     }
 
@@ -43,9 +43,9 @@ int main() {
     while(!gameOver){
         team_hp_reset(equipe);
         char command;
-        fflush(stdin);
+        fflush(NULL);
         scanf("%c", &command);
-        fflush(stdin);
+        fflush(NULL);
         int fightAgainst = -1;
         if(command == 'p'){
             pokedex_show(pokedex);
