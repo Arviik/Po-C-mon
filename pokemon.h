@@ -16,6 +16,10 @@ typedef struct {
     int speed;
     char *type;
 }Pokemon;
+typedef struct {
+    Pokemon *tab;
+    int size;
+} PokemonArray;
 Pokemon* newPokemon(char *name,double hp,double hp_max,int attack,int defense,int speed,char *type);
 Pokemon* starter();
 double losthp(Pokemon *pokemon_attacker,Pokemon *pokemon_attacked);
