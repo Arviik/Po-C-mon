@@ -34,4 +34,10 @@ Pokemon* show_team(Pokemon **equipe);
 void team_hp_reset (Pokemon **equipe);
 void pokedex_update(Pokemon *pokemon_wild,Pokemon **pokedex);
 void pokedex_show(Pokemon **pokedex);
+void free_pokemon(Pokemon *pokemon);
+PokemonArray *new_pokemon_array();
+void free_pokemon_array(PokemonArray *pokemonArray);
+void add_pokemon_to_array(PokemonArray *pokemonArray, const Pokemon *pokemon);
+Pokemon get_pokemon_from_array(const PokemonArray *pokemonArray, int index);
+PokemonArray *get_pokemon_array_from_csv();
 #endif //PO_C_MON_POKEMON_H
