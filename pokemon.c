@@ -283,7 +283,15 @@ int  healhp (Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
         return 0;
     }
 }
-int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe) {
+
+void team_hp_reset (Pokemon **equipe){
+    for(int  i = 0 ; i < 6; i++){
+        equipe[i]->hp = equipe[i]->hp_max;
+    }
+}
+
+
+int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
     time_t t;
     srand((unsigned) time(&t));
     printf("%d ", rand() % 4);
@@ -330,3 +338,4 @@ int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe) {
         }
     }
 }
+
