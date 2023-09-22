@@ -17,11 +17,6 @@ int main() {
 
     equipe[0]=starter();
     Pokemon *current_pokemon=equipe[0];
-    equipe[1]=newPokemon("Carapuce",88,88,48,32,43,"Eau");
-    current_pokemon=change_pokemon(equipe);
-    current_pokemon->hp-=losthp(current_pokemon,newPokemon("Salameche",78,78,52,21,65,"Feu"));
-    printf("%s %f",equipe[1]->name,equipe[1]->hp);
-
 
     //Génération du joueur et de la map
     Player *player = newPlayer(0, 0);
@@ -29,8 +24,10 @@ int main() {
     setSpawnPoint(map, player);
     updateMovement(map, player, ' ');
 
+
+    short gameOver = 0;
     //Boucle de jeu
-    while(1){
+    while(!gameOver){
         char command;
         fflush(stdin);
         scanf("%c", &command);
@@ -47,24 +44,32 @@ int main() {
                     fflush(stdin);
                     scanf("%d", &action);
                     if (action > 4 || action < 1){
-                        printf("Veuillez choisir une action possible");
+                        printf("\nVeuillez choisir une action possible\n");
                     }
                 } while (action > 4 || action < 1);
 
-                int roundResult;
+                int roundResult = 0;
                 switch (action) {
                     case 1:
                         roundResult = fight(current_pokemon, fightingPokemon, equipe);
-                        if (roundResult){
-                            printf("Vous avez gagnez le combat !");
+                        if (roundResult == 1){
+                            printf("\nVous avez gagnez le combat !");
                             isFighting = 0;
+                        }else if(roundResult == -1){
+                            printf("\nVous n'avez plus de pokemon dans votre equipe!\n           - GAME OVER - ");
+                            isFighting = 0;
+                            gameOver = 1;
                         }
                         break;
                     case 2:
                         healhp(current_pokemon->hp_max, current_pokemon->hp);
                         break;
                     case 3:
-
+                        roundResult = run_away(current_pokemon, fightingPokemon, equipe);
+                        if (roundResult == 1){
+                            printf("\nVous avez fuis le combat !");
+                            isFighting  = 0;
+                        }
                         break;
                     case 4:
 

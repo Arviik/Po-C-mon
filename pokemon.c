@@ -200,7 +200,7 @@ int run_away(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
     srand((unsigned) time(&t));
     printf("%d ",rand()%2);
         if(rand()%2==1){
-            return -1;
+            return 1;
         }
         else{
             pokemon_ally->hp-=losthp(pokemon_wild,pokemon_ally);
@@ -209,7 +209,6 @@ int run_away(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
                 printf("Votre pokemon est mort \n");
                 pokemon_ally= change_pokemon(equipe);
                 return -1;
-
             } else{
             return 0;
             }
