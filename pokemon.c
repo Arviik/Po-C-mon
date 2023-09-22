@@ -154,6 +154,21 @@ Pokemon* change_pokemon(Pokemon **equipe){
     return equipe[choose_pokemon];
 
 }
+Pokemon* pokedex(Pokemon *pokemon_wild,Pokemon **pokedex){
+    int exist=0;
+    int count=0;
+    for (int i = 0; i < 30; ++i) {
+        if(pokedex[i]->name==pokemon_wild->name){
+            exist=1;
+        }
+        if(pokedex[i]->hp!=0){
+            count++;
+        }
+    }
+    if(exist==0){
+        pokedex[count]=pokemon_wild;
+    }
+}
 int check_team(Pokemon **equipe){
     int count=0;
 
@@ -315,3 +330,4 @@ int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
         }
     }
 }
+
