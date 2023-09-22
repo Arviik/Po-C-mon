@@ -27,6 +27,7 @@ int main() {
         equipe[i]= calloc(1,sizeof(Pokemon));
 
     }
+
     pokedex[0]=starter();
 
     equipe[0]=starter();
@@ -48,7 +49,7 @@ int main() {
         scanf("%c", &command);
         fflush(stdin);
         int fightAgainst = -1;
-        if(command = 'p'){
+        if(command == 'p'){
             //show
         }else{
             int fightAgainst = updateMovement(map, player, command);
