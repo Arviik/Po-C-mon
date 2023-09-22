@@ -97,7 +97,7 @@ double pocmonType (char* typeOne, char* typetwo){
     return typeMatrix[oneIndice][twoIndice];
 }
 
-Pokemon* newPokemon(char *name,double hp,int hp_max,int attack,int defense,int speed,char *type){
+Pokemon* newPokemon(char *name,double hp,double hp_max,int attack,int defense,int speed,char *type){
     Pokemon *newPokemon= malloc(sizeof (Pokemon));
     newPokemon->name= malloc(sizeof(char)*(strlen(name)+1));
     strcpy(newPokemon->name,name);
@@ -193,4 +193,14 @@ int fight(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
             }
         }
     }
+}
+
+double  healhp (double hp_max, double current_hp){
+    printf("max %f : \n",hp_max);
+    double added_hp = hp_max * 0.5;
+    printf("ajout %f \n",added_hp);
+    if( added_hp + current_hp > hp_max){
+        return hp_max;
+    }
+    return added_hp + current_hp;
 }

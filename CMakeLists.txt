@@ -7,4 +7,6 @@ add_executable(Po_C_mon main.c
         map.c
         map.h
         pokemon.c
-        pokemon.h)
+        pokemon.h
+        perlin.c
+        perlin.h)
