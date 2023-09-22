@@ -9,7 +9,12 @@
 
 
 int main() {
-    printf("Po-C-mon!\n");
+    printf("  _____             _____      __  __             \n");
+    printf(" |  __ \\           / ____|    |  \\/  |            \n");
+    printf(" | |__) |__ ______| |   ______| \\  / | ___  _ __  \n");
+    printf(" |  ___/ _ \\______| |  |______| |\\/| |/ _ \\| '_ \\ \n");
+    printf(" | |  | (_) |     | |____     | |  | | (_) | | | |\n");
+    printf(" |_|   \\___/       \\_____|    |_|  |_|\\___/|_| |_|\n");
 
     Pokemon **equipe= calloc(6,sizeof(Pokemon));
     for (int i = 0; i < 6; ++i) {
@@ -40,7 +45,6 @@ int main() {
         fflush(stdin);
         int fightAgainst = updateMovement(map, player, command);
         if(fightAgainst != -1){
-            printf("FIGHT AGAINST POKEMON N° : %d", fightAgainst) ;
             short isFighting = 1;
             Pokemon *fightingPokemon = newPokemon("Salameche",78,78,52,21,65,"Feu");
             int action;

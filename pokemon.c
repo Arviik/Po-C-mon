@@ -116,10 +116,10 @@ Pokemon* starter(){
     Pokemon *Salameche= newPokemon("Salameche",78,78,52,21,65,"Feu");
     Pokemon *Carapuce= newPokemon("Carapuce",88,88,48,32,43,"Eau");
     Pokemon *Starter;
-    printf("Veuillez choisir un Starter 0 : Bulbizarre 1 : Salameche 2 : Carapuce \n");
+    printf("Veuillez choisir un Starter 1 : Bulbizarre 2 : Salameche 3 : Carapuce \n");
     fflush(stdin);
     scanf("%d",&choice);
-    switch (choice) {
+    switch (choice - 1) {
         case 0:
             Starter=Bulbizarre;
             break;
@@ -132,6 +132,7 @@ Pokemon* starter(){
         default:
             starter();
     }
+    printf("Tu as choisis : %s", Starter->name);
     return Starter;
 }
 double losthp(Pokemon *pokemon_attacker,Pokemon *pokemon_attacked){
