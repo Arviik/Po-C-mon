@@ -3,6 +3,7 @@
 #include <time.h>
 
 #include "map.h"
+#include "perlin.h"
 
 const int x = 25;
 const int y = 30;
@@ -15,7 +16,38 @@ Player *newPlayer(int startX, int startY){
     return player;
 }
 
-char** generateMap(Player *player){
+char** generatePerlin(){
+
+    char **map = calloc(x,sizeof(char *));
+    for (int i = 0; i < x; ++i) {
+        map[i] = calloc(y,sizeof(char));
+    }
+
+    for (int currentX = 0; currentX < x; ++currentX) {
+        for (int currentY = 0; currentY < y; ++currentY) {
+            float perlin = perlin2d(currentX, currentY, 0.1, 4);
+            if(perlin > 0.7){
+                map[currentX][currentY] = '#';
+            }else if(perlin > 0.5){
+                map[currentX][currentY] = ';';
+            }else{
+                map[currentX][currentY] = '.';
+            }
+        }
+    }
+
+
+    for (int currentX = 0; currentX < x; currentX++) {
+        for (int currentY = 0; currentY < y; currentY++) {
+                printf("%c ", map[currentX][currentY]);
+        }
+        printf("\n");
+    }
+
+    return map;
+}
+
+char** generateMap(){
 
     srand(time(0));
 
@@ -63,6 +95,24 @@ void setSpawnPoint(char** map, Player *player){
 }
 
 void changeMap(char** map, Player *player){
+    printf("%f", rand());
+    for (int currentX = 0; currentX < x; ++currentX) {
+        for (int currentY = 0; currentY < y; ++currentY) {
+            float perlin = perlin2d(currentX, currentY, (float)rand()/0.5, 4);
+            if(perlin > 0.7){
+                map[currentX][currentY] = '#';
+            }else if(perlin > 0.5){
+                map[currentX][currentY] = ';';
+            }else{
+                map[currentX][currentY] = '.';
+            }
+        }
+    }
+
+    map[player->currentX][player->currentY] = '.';
+}
+
+void changeMapLegacy(char** map, Player *player){
     char *randomChar = malloc(sizeof(char) * 100);
 
     for (int i = 0; i < 100; ++i) {

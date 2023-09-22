@@ -25,7 +25,7 @@ int main() {
 
     //Génération du joueur et de la map
     Player *player = newPlayer(0, 0);
-    char ** map = generateMap(player);
+    char ** map = generatePerlin();
     setSpawnPoint(map, player);
     updateMovement(map, player, ' ');
 

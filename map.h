@@ -14,6 +14,7 @@ struct Player* newPlayer(int startX, int startY);
 void showMap(char ** map, Player *player);
 void setSpawnPoint(char ** map, Player *player);
 int updateMovement(char **map, Player *player, char command);
-char** generateMap(Player *player);
+char** generateMap();
+char** generatePerlin();
 
 #endif //PO_C_MON_MAP_H
