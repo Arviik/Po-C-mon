@@ -35,7 +35,23 @@ int main() {
         fflush(stdin);
         scanf("%c", &command);
         fflush(stdin);
-        printf("FIGHT AGAINST POKEMON N° : %d", updateMovement(map, player, command));
-    };
+        int fightAgainst = updateMovement(map, player, command);
+        if(fightAgainst != -1){
+            printf("FIGHT AGAINST POKEMON N° : %d", fightAgainst) ;
+            short isFighting = 1;
+            Pokemon *fightingPokemon = newPokemon("Salameche",78,78,52,21,65,"Feu");
+            int fightState = fight(current_pokemon, fightingPokemon, equipe);
+            while (isFighting){
+                if (fightState == 0){
+                    fightState = fight(current_pokemon, fightingPokemon, equipe);
+                }else if(fightState == 1){
+                    printf("Vous avez gagnez le combat");
+                    isFighting == 0;
+                }else if (fightState == -1){
+
+                }
+            }
+        }
+    }
     return 0;
 }
