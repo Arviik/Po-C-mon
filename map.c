@@ -4,6 +4,7 @@
 
 #include "map.h"
 #include "perlin.h"
+#include "perlin2d.h"
 
 const int x = 25;
 const int y = 30;
@@ -96,12 +97,27 @@ void setSpawnPoint(char** map, Player *player){
 
 void changeMap(char** map, Player *player){
     printf("%f", rand());
+
+    float *ft = calloc(x,sizeof(float) * x * y);
+
+
+    perlin2d2(ft, x, y, 390, 1.2, 30);
+
+    printf("\n");
+    for (int currentX = 0; currentX < x; currentX++) {
+        for (int currentY = 0; currentY < y; currentY++) {
+                printf("%.2f ", ft[currentX + currentY]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
     for (int currentX = 0; currentX < x; ++currentX) {
         for (int currentY = 0; currentY < y; ++currentY) {
-            float perlin = perlin2d(currentX, currentY, 0.1, 4);
-            if(perlin > 0.7){
+            float perlin = perlin2d(currentX, currentY, rand()*RAND_MAX, 4);
+            if(ft[currentY * currentX] > 0.7){
                 map[currentX][currentY] = '#';
-            }else if(perlin > 0.5){
+            }else if(ft[currentY * currentX] > 0.5){
                 map[currentX][currentY] = ';';
             }else{
                 map[currentX][currentY] = '.';
