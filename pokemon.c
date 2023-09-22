@@ -154,22 +154,43 @@ Pokemon* change_pokemon(Pokemon **equipe){
 
 }
 //entre les refereneces(&) des deux pokemon
-void fight(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
-    if(pokemon_ally->speed>pokemon_wild->speed){
-        losthp(pokemon_ally,pokemon_wild);
+int fight(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
+    if(pokemon_ally->speed>=pokemon_wild->speed){
+        pokemon_wild->hp-=losthp(pokemon_ally,pokemon_wild);
+        printf("Le pokemon ennemie a perdu %f hp il a desormais %f / %f\n",losthp(pokemon_ally,pokemon_wild),pokemon_wild->hp,pokemon_wild->hp_max);
         if(pokemon_wild->hp<=0){
             printf("Le pokemon sauvage est mort \n");
+            return 1;
         } else{
-            losthp(pokemon_wild,pokemon_ally);
+            pokemon_ally->hp-=losthp(pokemon_wild,pokemon_ally);
+            printf("Votre pokemon a perdu %f hp il a desormais %f / %f\n",losthp(pokemon_wild,pokemon_ally),pokemon_ally->hp,pokemon_ally->hp_max);
+            if(pokemon_ally->hp<=0){
+                printf("Votre pokemon est mort \n");
+                pokemon_ally= change_pokemon(equipe);
+                return -1;
+
+            } else{
+            return 0;
+            }
+
         }
-    } else if(pokemon_ally->speed>pokemon_wild->speed){
-        losthp(pokemon_wild,pokemon_ally);
-        if(pokemon_wild->hp<=0){
+    } else if(pokemon_ally->speed<pokemon_wild->speed){
+        pokemon_ally->hp-=losthp(pokemon_wild,pokemon_ally);
+        printf("Votre pokemon a perdu %f hp il a desormais %f / %f\n",losthp(pokemon_wild,pokemon_ally),pokemon_ally->hp,pokemon_ally->hp_max);
+        if(pokemon_ally->hp<=0){
             printf("Votre pokemon est mort \n");
-            change_pokemon(equipe);
+            pokemon_ally= change_pokemon(equipe);
+            return -1;
+
         } else{
-            losthp(pokemon_ally,pokemon_wild);
+            pokemon_wild->hp-=losthp(pokemon_ally,pokemon_wild);
+            printf("Le pokemon ennemie a perdu %f hp il a desormais %f / %f\n",losthp(pokemon_ally,pokemon_wild),pokemon_wild->hp,pokemon_wild->hp_max);
+            if(pokemon_wild->hp<=0){
+                printf("Le pokemon sauvage est mort \n");
+                return 1;
+            } else{
+            return 0;
+            }
         }
     }
-
 }
