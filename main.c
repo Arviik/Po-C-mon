@@ -40,17 +40,38 @@ int main() {
             printf("FIGHT AGAINST POKEMON N° : %d", fightAgainst) ;
             short isFighting = 1;
             Pokemon *fightingPokemon = newPokemon("Salameche",78,78,52,21,65,"Feu");
-            int fightState = fight(current_pokemon, fightingPokemon, equipe);
-            while (isFighting){
-                if (fightState == 0){
-                    fightState = fight(current_pokemon, fightingPokemon, equipe);
-                }else if(fightState == 1){
-                    printf("Vous avez gagnez le combat");
-                    isFighting == 0;
-                }else if (fightState == -1){
+            int action;
+            do{
+                printf("Que voulez vous faire ?\n 1 - Attaquer 2 - Soigner 3 - Fuir 4 - Pokeball\n");
+                do {
+                    fflush(stdin);
+                    scanf("%d", &action);
+                    if (action > 4 || action < 1){
+                        printf("Veuillez choisir une action possible");
+                    }
+                } while (action > 4 || action < 1);
 
+                int roundResult;
+                switch (action) {
+                    case 1:
+                        roundResult = fight(current_pokemon, fightingPokemon, equipe);
+                        if (roundResult){
+                            printf("Vous avez gagnez le combat !");
+                            isFighting = 0;
+                        }
+                        break;
+                    case 2:
+                        healhp(current_pokemon->hp_max, current_pokemon->hp);
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+
+                        break;
                 }
-            }
+
+            }while (isFighting);
         }
     }
     return 0;

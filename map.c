@@ -98,7 +98,7 @@ void changeMap(char** map, Player *player){
     printf("%f", rand());
     for (int currentX = 0; currentX < x; ++currentX) {
         for (int currentY = 0; currentY < y; ++currentY) {
-            float perlin = perlin2d(currentX, currentY, (float)rand()/0.5, 4);
+            float perlin = perlin2d(currentX, currentY, 0.1, 4);
             if(perlin > 0.7){
                 map[currentX][currentY] = '#';
             }else if(perlin > 0.5){
@@ -204,9 +204,9 @@ int updateMovement(char** map,Player *player, char command){
     showMap(map, player);
 
     if(map[player->currentX][player->currentY] == ';'){
-        int random = rand()%10;
+        int random = rand()%2;
         if(!random){
-            return rand()%15;
+            return rand()%11;
         }
     }
 
