@@ -16,7 +16,11 @@ int main() {
         equipe[i]= calloc(1,sizeof(Pokemon));
 
     }
+    Pokemon **pokedex= calloc(30,sizeof(Pokemon));
+    for (int i = 0; i < 30; ++i) {
+        equipe[i]= calloc(1,sizeof(Pokemon));
 
+    }
     equipe[0]=starter();
     Pokemon *current_pokemon=equipe[0];
 
@@ -84,7 +88,16 @@ int main() {
                         }
                         break;
                     case 4:
-
+                        printf("\n Vous lancez votre pokeball");
+                        roundResult=pokeball(current_pokemon,fightingPokemon,equipe);
+                        if (roundResult == 1){
+                            printf("\nVous avez capturer le pokemon !");
+                            isFighting  = 0;
+                        }else if(roundResult == -1){
+                            printf("\nVous n'avez plus de pokemon dans votre equipe!\n           - GAME OVER - ");
+                            isFighting = 0;
+                            gameOver = 1;
+                        }
                         break;
                 }
 
