@@ -162,10 +162,10 @@ Pokemon* show_team(Pokemon **equipe){
         }
     }
 }
-void pokedex(Pokemon *pokemon_wild,Pokemon **pokedex){
+void pokedex_update(Pokemon *pokemon_wild,Pokemon **pokedex){
     int exist=0;
     int count=0;
-    for (int i = 0; i < 30; ++i) {
+    for (int i = 0; i < 11; ++i) {
         if(pokedex[i]->name==pokemon_wild->name){
             exist=1;
         }
@@ -176,6 +176,16 @@ void pokedex(Pokemon *pokemon_wild,Pokemon **pokedex){
     if(exist==0){
         pokedex[count]=pokemon_wild;
     }
+}
+void pokedex_show(Pokemon **pokedex){
+    int count=0;
+    for (int i = 0; i < 11; ++i) {
+        if(pokedex[i]->hp!=0){
+            printf("%d: %s %.0f pv\n",i,pokedex[i]->name,pokedex[i]->hp);
+            count++;
+        }
+    }
+    printf("Il vous reste %d pokemon a découvrir",11-count);
 }
 int check_team(Pokemon **equipe){
     int count=0;
@@ -191,7 +201,7 @@ int check_team(Pokemon **equipe){
     else if(count==0){
         return 2;
     }
-    else if(count>0 && count<=5){
+    else if(count>0 && count<=05){
         return 3;
     }
     else{

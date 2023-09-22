@@ -28,4 +28,6 @@ int run_away(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe);
 int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe);
 Pokemon* show_team(Pokemon **equipe);
 void team_hp_reset (Pokemon **equipe);
+void pokedex_update(Pokemon *pokemon_wild,Pokemon **pokedex);
+void pokedex_show(Pokemon **pokedex);
 #endif //PO_C_MON_POKEMON_H

@@ -22,15 +22,15 @@ int main() {
         equipe[i]= calloc(1,sizeof(Pokemon));
 
     }
-    Pokemon **pokedex= calloc(30,sizeof(Pokemon));
-    for (int i = 0; i < 30; ++i) {
+    Pokemon **pokedex= calloc(11,sizeof(Pokemon));
+    for (int i = 0; i < 11; ++i) {
         equipe[i]= calloc(1,sizeof(Pokemon));
 
     }
 
-    pokedex[0]=starter();
 
     equipe[0]=starter();
+    pokedex[0]=equipe[0];
     Pokemon *current_pokemon=equipe[0];
 
     //Génération du joueur et de la map
@@ -50,13 +50,14 @@ int main() {
         fflush(stdin);
         int fightAgainst = -1;
         if(command == 'p'){
-            //show
+            pokedex_show(pokedex);
         }else{
             int fightAgainst = updateMovement(map, player, command);
         }
         if(fightAgainst != -1){
             short isFighting = 1;
             Pokemon *fightingPokemon = newPokemon("Salameche",78,78,52,21,65,"Feu");
+            pokedex_update(fightingPokemon,pokedex);
             printf("Vous rencontrez un %s sauvage",fightingPokemon->name);
             int action;
             do{
