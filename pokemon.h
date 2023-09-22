@@ -10,13 +10,13 @@ double pocmonType (char* typeOne, char* typetwo);
 typedef struct {
     char *name;
     double hp;
-    int hp_max;
+    double hp_max;
     int attack;
     int defense;
     int speed;
     char *type;
 }Pokemon;
-Pokemon* newPokemon(char *name,double hp,int hp_max,int attack,int defense,int speed,char *type);
+Pokemon* newPokemon(char *name,double hp,double hp_max,int attack,int defense,int speed,char *type);
 Pokemon* starter();
 double losthp(Pokemon *pokemon_attacker,Pokemon *pokemon_attacked);
 Pokemon* change_pokemon(Pokemon **equipe);
