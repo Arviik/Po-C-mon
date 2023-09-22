@@ -220,7 +220,7 @@ int run_away(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
     srand((unsigned) time(&t));
     printf("%d ",rand()%2);
         if(rand()%2==1){
-            printf("Vous avez réussi a fuir");
+            printf("Vous avez réussi a fuir\n");
             return 1;
         }
         else{
@@ -238,9 +238,13 @@ int run_away(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
             return 0;
             }
         }
+
 }
 int  healhp (Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
     pokemon_ally->hp += pokemon_ally->hp_max * 0.5;
+    if(pokemon_ally->hp>pokemon_ally->hp_max){
+        pokemon_ally->hp=pokemon_ally->hp_max;
+    }
     pokemon_ally->hp-=losthp(pokemon_wild,pokemon_ally);
     printf("Votre pokemon a perdu %f hp il a desormais %f / %f\n",losthp(pokemon_wild,pokemon_ally),pokemon_ally->hp,pokemon_ally->hp_max);
     if(pokemon_ally->hp<=0){
@@ -255,4 +259,27 @@ int  healhp (Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
         return 0;
     }
 }
+int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
+    time_t t;
+    srand((unsigned) time(&t));
+    printf("%d ",rand()%4);
+    if(rand()%4==1){
+        printf("Vous avez réussi a capturer le pokemon!\n");
 
+        return 1;
+    }
+    else{
+        pokemon_ally->hp-=losthp(pokemon_wild,pokemon_ally);
+        printf("Votre pokemon a perdu %f hp il a desormais %f / %f\n",losthp(pokemon_wild,pokemon_ally),pokemon_ally->hp,pokemon_ally->hp_max);
+        if(pokemon_ally->hp<=0){
+            printf("Votre pokemon est mort \n");
+            if(check_team(equipe)==0){
+                pokemon_ally= change_pokemon(equipe);
+            } else{
+                return -1;
+            }
+
+    } else{
+        return 0;
+    }
+}
