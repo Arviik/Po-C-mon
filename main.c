@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "pokemon.h"
+#include "pokedex.h"
 
 #include <stdlib.h>
 #include "map.h"
@@ -46,7 +47,12 @@ int main() {
         fflush(stdin);
         scanf("%c", &command);
         fflush(stdin);
-        int fightAgainst = updateMovement(map, player, command);
+        int fightAgainst = -1;
+        if(command = 'p'){
+            //show
+        }else{
+            int fightAgainst = updateMovement(map, player, command);
+        }
         if(fightAgainst != -1){
             short isFighting = 1;
             Pokemon *fightingPokemon = newPokemon("Salameche",78,78,52,21,65,"Feu");
