@@ -21,6 +21,7 @@ Pokemon* starter();
 double losthp(Pokemon *pokemon_attacker,Pokemon *pokemon_attacked);
 Pokemon* change_pokemon(Pokemon **equipe);
 int  healhp (Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe);
+void team_hp_reset (Pokemon **equipe);
 int fight(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe);
 int run_away(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe);
 #endif //PO_C_MON_POKEMON_H
