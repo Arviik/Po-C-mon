@@ -357,6 +357,7 @@ int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
         }
     }
 }
+
 void free_pokemon(Pokemon *pokemon) {
     free(pokemon->name);
     free(pokemon->type);
@@ -385,10 +386,6 @@ void add_pokemon_to_array(PokemonArray *pokemonArray, const Pokemon *pokemon) {
     buffer[pokemonArray->size] = *pokemon;
     pokemonArray->tab = buffer;
     pokemonArray->size++;
-}
-
-Pokemon get_pokemon_from_array(const PokemonArray *pokemonArray, int index) {
-    return pokemonArray->tab[index];
 }
 
 PokemonArray *get_pokemon_array_from_csv() {
@@ -443,4 +440,8 @@ PokemonArray *get_pokemon_array_from_csv() {
     } else {
         return NULL;
     }
+}
+
+Pokemon get_pokemon(int index) {
+    return get_pokemon_array_from_csv()->tab[index];
 }
