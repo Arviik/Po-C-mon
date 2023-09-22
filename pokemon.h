@@ -26,5 +26,6 @@ int check_team(Pokemon **equipe);
 int fight(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe);
 int run_away(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe);
 int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe);
+Pokemon* show_team(Pokemon **equipe);
 void team_hp_reset (Pokemon **equipe);
 #endif //PO_C_MON_POKEMON_H
