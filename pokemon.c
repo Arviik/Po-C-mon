@@ -154,6 +154,21 @@ Pokemon* change_pokemon(Pokemon **equipe){
     return equipe[choose_pokemon];
 
 }
+Pokemon* pokedex(Pokemon *pokemon_wild,Pokemon **pokedex){
+    int exist=0;
+    int count=0;
+    for (int i = 0; i < 30; ++i) {
+        if(pokedex[i]->name==pokemon_wild->name){
+            exist=1;
+        }
+        if(pokedex[i]->hp!=0){
+            count++;
+        }
+    }
+    if(exist==0){
+        pokedex[count]=pokemon_wild;
+    }
+}
 int check_team(Pokemon **equipe){
     int count=0;
 
@@ -164,9 +179,17 @@ int check_team(Pokemon **equipe){
     }
     if(count==5){
         return -1;
-    } else{
+    }
+    else if(count==0){
+        return 2;
+    }
+    else if(count>0 && count<5){
+        return 3;
+    }
+    else{
         return 0;
     }
+
 }
 //entre les refereneces(&) des deux pokemon
 int fight(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
@@ -274,7 +297,29 @@ int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
     printf("%d ",rand()%4);
     if(rand()%4==1){
         printf("Vous avez réussi a capturer le pokemon!\n");
+        if(check_team(equipe)==2){
+            printf("Vous avez atteint le nombre de pokemon maximum dans votre equipe \n");
+            for (int i = 0; i < 6; ++i) {
+                if(equipe[i]->hp!=0){
+                    printf("%d: %s %.0f pv\n",i,equipe[i]->name,equipe[i]->hp);
+                }
+            }
+            int choose_pokemon;
+            fflush(stdin);
+            printf("choisissez le pokemon a relacher : \n");
+            scanf("%d",&choose_pokemon);
+            equipe[choose_pokemon]=pokemon_wild;
 
+        } else if(check_team(equipe)==3){
+            int count=0;
+            for (int i = 0; i < 6; ++i) {
+                if(equipe[i]->hp!=0){
+                    count++;
+                }
+            }
+            equipe[count]=pokemon_wild;
+
+        }
         return 1;
     }
     else{
@@ -293,3 +338,4 @@ int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
         }
     }
 }
+
