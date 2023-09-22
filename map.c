@@ -193,7 +193,7 @@ int updateMovement(char** map,Player *player, char command){
     showMap(map, player);
 
     if(map[player->currentX][player->currentY] == ';'){
-        int random = rand()%5;
+        int random = rand()%2-1;
         if(!random){
             return rand()%11;
         }

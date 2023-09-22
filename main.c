@@ -51,9 +51,8 @@ int main() {
         int fightAgainst = -1;
         if(command == 'p'){
             pokedex_show(pokedex);
-        }else{
-            int fightAgainst = updateMovement(map, player, command);
         }
+        fightAgainst = updateMovement(map, player, command);
         if(fightAgainst != -1){
             short isFighting = 1;
             Pokemon *fightingPokemon = newPokemon("Salameche",78,78,52,21,65,"Feu");
