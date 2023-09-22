@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "pokemon.h"
-
+#include <time.h>
 double pocmonType (char* typeOne, char* typetwo){
     int oneIndice = 0;
     int twoIndice = 0;
@@ -194,7 +194,28 @@ int fight(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
         }
     }
 }
+int run_away(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
+    time_t t;
+    int n=5;
+    srand((unsigned) time(&t));
+    printf("%d ",rand()%2);
+        if(rand()%2==1){
+            return -1;
+        }
+        else{
+            pokemon_ally->hp-=losthp(pokemon_wild,pokemon_ally);
+            printf("Votre pokemon a perdu %f hp il a desormais %f / %f\n",losthp(pokemon_wild,pokemon_ally),pokemon_ally->hp,pokemon_ally->hp_max);
+            if(pokemon_ally->hp<=0){
+                printf("Votre pokemon est mort \n");
+                pokemon_ally= change_pokemon(equipe);
+                return -1;
 
+            } else{
+            return 0;
+            }
+        }
+
+}
 double  healhp (double hp_max, double current_hp){
     printf("max %f : \n",hp_max);
     double added_hp = hp_max * 0.5;
