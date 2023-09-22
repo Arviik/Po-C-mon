@@ -155,7 +155,14 @@ Pokemon* change_pokemon(Pokemon **equipe){
     return equipe[choose_pokemon];
 
 }
-Pokemon* pokedex(Pokemon *pokemon_wild,Pokemon **pokedex){
+Pokemon* show_team(Pokemon **equipe){
+    for (int i = 0; i < 6; ++i) {
+        if(equipe[i]->hp!=0){
+            printf("%d: %s %.0f pv\n",i,equipe[i]->name,equipe[i]->hp);
+        }
+    }
+}
+void pokedex(Pokemon *pokemon_wild,Pokemon **pokedex){
     int exist=0;
     int count=0;
     for (int i = 0; i < 30; ++i) {
@@ -178,13 +185,13 @@ int check_team(Pokemon **equipe){
             count++;
         }
     }
-    if(count==5){
+    if(count>5){
         return -1;
     }
     else if(count==0){
         return 2;
     }
-    else if(count>0 && count<5){
+    else if(count>0 && count<=5){
         return 3;
     }
     else{
@@ -321,6 +328,7 @@ int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
             equipe[count]=pokemon_wild;
 
         }
+
         return 1;
     } else {
         pokemon_ally->hp -= losthp(pokemon_wild, pokemon_ally);
