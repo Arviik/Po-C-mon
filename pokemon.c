@@ -335,7 +335,7 @@ int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
                     count++;
                 }
             }
-            equipe[count]=pokemon_wild;
+            equipe[count+1]=pokemon_wild;
 
         }
 
