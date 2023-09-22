@@ -20,7 +20,7 @@ Pokemon* newPokemon(char *name,double hp,double hp_max,int attack,int defense,in
 Pokemon* starter();
 double losthp(Pokemon *pokemon_attacker,Pokemon *pokemon_attacked);
 Pokemon* change_pokemon(Pokemon **equipe);
-double  healhp (double hp_max, double current_hp);
+int  healhp (Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe);
 int fight(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe);
 int run_away(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe);
 #endif //PO_C_MON_POKEMON_H
