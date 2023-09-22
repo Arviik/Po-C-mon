@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include "map.h"
 
+
+
 int main() {
     printf("Po-C-mon!\n");
 
@@ -59,16 +61,26 @@ int main() {
                             printf("\nVous n'avez plus de pokemon dans votre equipe!\n           - GAME OVER - ");
                             isFighting = 0;
                             gameOver = 1;
+
                         }
                         break;
                     case 2:
-                        healhp(current_pokemon->hp_max, current_pokemon->hp);
+                        roundResult = healhp(current_pokemon, fightingPokemon, equipe);
+                        if(roundResult == -1){
+                            printf("\nVous n'avez plus de pokemon dans votre equipe!\n           - GAME OVER - ");
+                            isFighting = 0;
+                            gameOver = 1;
+                        }
                         break;
                     case 3:
                         roundResult = run_away(current_pokemon, fightingPokemon, equipe);
                         if (roundResult == 1){
                             printf("\nVous avez fuis le combat !");
                             isFighting  = 0;
+                        }else if(roundResult == -1){
+                            printf("\nVous n'avez plus de pokemon dans votre equipe!\n           - GAME OVER - ");
+                            isFighting = 0;
+                            gameOver = 1;
                         }
                         break;
                     case 4:
