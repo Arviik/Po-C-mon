@@ -216,12 +216,16 @@ int run_away(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
         }
 
 }
-double  healhp (double hp_max, double current_hp){
-    printf("max %f : \n",hp_max);
-    double added_hp = hp_max * 0.5;
-    printf("ajout %f \n",added_hp);
-    if( added_hp + current_hp > hp_max){
-        return hp_max;
+int  healhp (Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
+    pokemon_ally->hp = pokemon_ally->hp_max * 0.5;
+    pokemon_ally->hp-=losthp(pokemon_wild,pokemon_ally);
+    printf("Votre pokemon a perdu %f hp il a desormais %f / %f\n",losthp(pokemon_wild,pokemon_ally),pokemon_ally->hp,pokemon_ally->hp_max);
+    if(pokemon_ally->hp<=0){
+        printf("Votre pokemon est mort \n");
+        pokemon_ally= change_pokemon(equipe);
+        return -1;
+
+    } else{
+        return 0;
     }
-    return added_hp + current_hp;
 }
