@@ -10,5 +10,4 @@ add_executable(Po_C_mon main.c
         pokemon.h
         perlin.c
         perlin.h
-        perlin2d.c
-        perlin2d.h)
+)
