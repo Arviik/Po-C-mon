@@ -145,7 +145,6 @@ void showMap(char ** map, Player *player){
 }
 
 int updateMovement(char** map,Player *player, char command){
-    printf("%d %d : %d %d\n", player->currentX, player->currentY, x, y);
     switch (command) {
         case 'z':
             if(player->currentX - 1 < 0){
@@ -194,7 +193,7 @@ int updateMovement(char** map,Player *player, char command){
     showMap(map, player);
 
     if(map[player->currentX][player->currentY] == ';'){
-        int random = rand()%2;
+        int random = rand()%2-1;
         if(!random){
             return rand()%11;
         }

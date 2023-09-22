@@ -116,10 +116,10 @@ Pokemon* starter(){
     Pokemon *Salameche= newPokemon("Salameche",78,78,52,21,65,"Feu");
     Pokemon *Carapuce= newPokemon("Carapuce",88,88,48,32,43,"Eau");
     Pokemon *Starter;
-    printf("Veuillez choisir un Starter 0 : Bulbizarre 1 : Salameche 2 : Carapuce \n");
+    printf("Veuillez choisir un Starter 1 : Bulbizarre 2 : Salameche 3 : Carapuce \n");
     fflush(stdin);
     scanf("%d",&choice);
-    switch (choice) {
+    switch (choice - 1) {
         case 0:
             Starter=Bulbizarre;
             break;
@@ -132,6 +132,7 @@ Pokemon* starter(){
         default:
             starter();
     }
+    printf("Tu as choisis : %s", Starter->name);
     return Starter;
 }
 double losthp(Pokemon *pokemon_attacker,Pokemon *pokemon_attacked){
@@ -161,10 +162,10 @@ Pokemon* show_team(Pokemon **equipe){
         }
     }
 }
-void pokedex(Pokemon *pokemon_wild,Pokemon **pokedex){
+void pokedex_update(Pokemon *pokemon_wild,Pokemon **pokedex){
     int exist=0;
     int count=0;
-    for (int i = 0; i < 30; ++i) {
+    for (int i = 0; i < 11; ++i) {
         if(pokedex[i]->name==pokemon_wild->name){
             exist=1;
         }
@@ -175,6 +176,16 @@ void pokedex(Pokemon *pokemon_wild,Pokemon **pokedex){
     if(exist==0){
         pokedex[count]=pokemon_wild;
     }
+}
+void pokedex_show(Pokemon **pokedex){
+    int count=0;
+    for (int i = 0; i < 11; ++i) {
+        if(pokedex[i]->hp!=0){
+            printf("%d: %s %.0f pv\n",i,pokedex[i]->name,pokedex[i]->hp);
+            count++;
+        }
+    }
+    printf("Il vous reste %d pokemon a découvrir",11-count);
 }
 int check_team(Pokemon **equipe){
     int count=0;
@@ -190,7 +201,7 @@ int check_team(Pokemon **equipe){
     else if(count==0){
         return 2;
     }
-    else if(count>0 && count<=5){
+    else if(count>0 && count<=05){
         return 3;
     }
     else{
@@ -346,4 +357,90 @@ int pokeball(Pokemon *pokemon_ally,Pokemon *pokemon_wild,Pokemon **equipe){
         }
     }
 }
+void free_pokemon(Pokemon *pokemon) {
+    free(pokemon->name);
+    free(pokemon->type);
+    free(pokemon);
+}
 
+PokemonArray *new_pokemon_array() {
+    PokemonArray *pokemonArray = malloc(sizeof(PokemonArray));
+    pokemonArray->tab = NULL;
+    pokemonArray->size = 0;
+    return pokemonArray;
+}
+
+void free_pokemon_array(PokemonArray *pokemonArray) {
+    for (int i = 0; i < pokemonArray->size; i++) {
+        free_pokemon(&pokemonArray->tab[i]);
+    }
+    free(pokemonArray);
+}
+
+void add_pokemon_to_array(PokemonArray *pokemonArray, const Pokemon *pokemon) {
+    Pokemon *buffer = malloc(sizeof(Pokemon) * (pokemonArray->size + 1));
+    for (int i = 0; i < pokemonArray->size; i++) {
+        buffer[i] = pokemonArray->tab[i];
+    }
+    buffer[pokemonArray->size] = *pokemon;
+    pokemonArray->tab = buffer;
+    pokemonArray->size++;
+}
+
+Pokemon get_pokemon_from_array(const PokemonArray *pokemonArray, int index) {
+    return pokemonArray->tab[index];
+}
+
+PokemonArray *get_pokemon_array_from_csv() {
+    FILE *f = fopen("../poCmon.csv", "rb");
+    if (f != NULL) {
+        PokemonArray *pokemonArray = new_pokemon_array();
+        int nbRows = 0;
+        char c = fgetc(f);
+        while (c != EOF) {
+            if (c == '\n') {
+                nbRows++;
+            }
+            c = fgetc(f);
+        }
+        rewind(f);
+        do {
+            c = fgetc(f);
+        } while (c != '\n');
+        for (int i = 0; i < nbRows; i++) {
+            char **buffer = malloc(sizeof(char *) * 6);
+            for (int j = 0; j < 6; j++) {
+                int stringLen = 0;
+                do {
+                    c = fgetc(f);
+                    stringLen++;
+                }while (c != ';' && c != '\n' && c != EOF);
+                if (c == EOF) {
+                    fseek(f, ftell(f) + 1, SEEK_SET);
+                }
+                fseek(f, ftell(f) - stringLen, SEEK_SET);
+                buffer[j] = malloc(sizeof(char) * stringLen);
+                for (int k = 0; k < stringLen; k++) {
+                    buffer[j][k] = fgetc(f);
+                }
+                buffer[j][stringLen - 1] = '\0';
+            }
+            add_pokemon_to_array(
+                    pokemonArray,
+                    newPokemon(
+                            buffer[0],
+                            atoi(buffer[1]),
+                            atoi(buffer[1]),
+                            atoi(buffer[2]),
+                            atoi(buffer[3]),
+                            atoi(buffer[4]),
+                            buffer[5]
+                    )
+            );
+        }
+        fclose(f);
+        return pokemonArray;
+    } else {
+        return NULL;
+    }
+}

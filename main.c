@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "pokemon.h"
+#include "pokedex.h"
 
 #include <stdlib.h>
 #include "map.h"
@@ -9,21 +10,27 @@
 
 
 int main() {
-    printf("Po-C-mon!\n");
+    printf("  _____             _____      __  __             \n");
+    printf(" |  __ \\           / ____|    |  \\/  |            \n");
+    printf(" | |__) |__ ______| |   ______| \\  / | ___  _ __  \n");
+    printf(" |  ___/ _ \\______| |  |______| |\\/| |/ _ \\| '_ \\ \n");
+    printf(" | |  | (_) |     | |____     | |  | | (_) | | | |\n");
+    printf(" |_|   \\___/       \\_____|    |_|  |_|\\___/|_| |_|\n");
 
     Pokemon **equipe= calloc(6,sizeof(Pokemon));
     for (int i = 0; i < 6; ++i) {
         equipe[i]= calloc(1,sizeof(Pokemon));
 
     }
-    Pokemon **pokedex= calloc(30,sizeof(Pokemon));
-    for (int i = 0; i < 30; ++i) {
+    Pokemon **pokedex= calloc(11,sizeof(Pokemon));
+    for (int i = 0; i < 11; ++i) {
         equipe[i]= calloc(1,sizeof(Pokemon));
 
     }
-    pokedex[0]=starter();
+
 
     equipe[0]=starter();
+    pokedex[0]=equipe[0];
     Pokemon *current_pokemon=equipe[0];
 
     //Génération du joueur et de la map
@@ -41,11 +48,15 @@ int main() {
         fflush(stdin);
         scanf("%c", &command);
         fflush(stdin);
-        int fightAgainst = updateMovement(map, player, command);
+        int fightAgainst = -1;
+        if(command == 'p'){
+            pokedex_show(pokedex);
+        }
+        fightAgainst = updateMovement(map, player, command);
         if(fightAgainst != -1){
-            printf("FIGHT AGAINST POKEMON N° : %d", fightAgainst) ;
             short isFighting = 1;
             Pokemon *fightingPokemon = newPokemon("Salameche",78,78,52,21,65,"Feu");
+            pokedex_update(fightingPokemon,pokedex);
             printf("Vous rencontrez un %s sauvage",fightingPokemon->name);
             int action;
             do{
